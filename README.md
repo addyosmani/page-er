@@ -36,6 +36,32 @@ bower install polymer-paginator
     <polymer-paginator><polymer-paginator>
     ```
 
+## Examples
+
+Basic usage:
+
+```
+<polymer-paginator perpage="5" currentpage="0"></polymer-paginator>
+```
+
+Set items per page:
+
+```
+<polymer-paginator perpage="5"></polymer-paginator>
+```
+
+Set current page:
+
+```
+<polymer-paginator perpage="5" currentpage="3"></polymer-paginator>
+```
+
+Customize next and previous labels:
+
+```
+<polymer-paginator previous="Previous!" next="Next!" ></polymer-paginator>
+```
+
 ## Setup
 
 In order to run it locally you'll need a basic server setup.
