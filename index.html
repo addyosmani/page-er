@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>&lt;polymer-paginator&gt;</title>
+
+	<!-- Importing Web Component's Polyfill -->
+	<script src="app/bower_components/platform/platform.js"></script>
+
+	<!-- Importing Custom Elements -->
+	<link rel="import" href="src/polymer-paginator.html">
+	
+	<!-- Styles for demo page -->
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<h1><a href="http://github.com/addyosmani/polymer-paginator">&lt;polymer-paginator&gt;</a></h1>
+	<h2>A <a href="http://polymer-project.org">Polymer</a> element for paginating model data</h2>
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Item name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<template id="items" repeat="{{items}}">
+					<tr>
+						<td>{{id}}</td>
+						<td>{{name}}</td>
+						<td>{{description}}</td>
+					</tr>
+				</template>
+			</tbody>
+		</table>
+
+		<!-- Using Custom Elements -->
+		<polymer-paginator perpage="5" currentpage="0"></polymer-paginator>
+
+		<h3>Usage</h3>
+
+		<p>Basic usage:</p>
+		<pre>
+			&lt;polymer-paginator perpage="5" currentpage="0"&gt;&lt;/polymer-paginator&gt;
+		</pre>
+
+		<p>Set items per page:</p>
+		<pre>
+			&lt;polymer-paginator perpage="5"&gt;&lt;/polymer-paginator&gt;
+		</pre>
+
+		<p>Set current page:</p>
+		<pre>
+			&lt;polymer-paginator perpage="5" currentpage="3"&gt;&lt;/polymer-paginator&gt;
+		</pre>
+
+		<p>Customize next and previous labels:</p>
+		<pre>
+			&lt;polymer-paginator previous="Previous!" next="Next!" &gt;&lt;/polymer-paginator&gt;
+		</pre>
+	</div>
+	<script>
+	// Select the grid/table where your main data will appear
+	var t = document.querySelector("#items");
+
+	// Select the paginator to use with this element
+	var m = document.querySelector("polymer-paginator");
+
+	// Create a model we will populate with data
+	var model = {
+		items: []
+	};
+
+	// As this is an example, populate some sample data inside
+	for (var i = 1; i < 50; i++) {
+		model.items.push({
+			id: i,
+			name: "Item "+ i,
+			description: "description " + i
+		});
+	}
+
+	// Set the model data on our grid/table
+	t.model = model;
+
+	// Set the model data on our paginator
+	m.model = model;
+	</script>
+</body>
+</html>

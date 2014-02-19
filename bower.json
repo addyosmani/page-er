@@ -1,0 +1,28 @@
+{
+  "name": "polymer-paginator",
+  "version": "0.0.1",
+  "homepage": "https://github.com/addyosmani/polymer-paginator",
+  "authors": [
+    "Addy Osmani <addyosmani@gmail.com>"
+  ],
+  "description": "A Polymer element for pagination",
+  "main": "src/polymer-paginator.html",
+  "keywords": [
+    "polymer",
+    "web-component",
+    "web-components",
+    "pagination",
+    "paging"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "platform": "Polymer/platform#~0.2.0",
+    "polymer": "Polymer/polymer#~0.2.0"
+  }
+}
