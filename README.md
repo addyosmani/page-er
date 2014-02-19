@@ -41,7 +41,7 @@ bower install polymer-paginator
 Basic usage:
 
 ```
-<polymer-paginator perpage="5" currentpage="0"></polymer-paginator>
+<polymer-paginator></polymer-paginator>
 ```
 
 Set items per page:
@@ -50,10 +50,10 @@ Set items per page:
 <polymer-paginator perpage="5"></polymer-paginator>
 ```
 
-Set current page:
+Set current page and items per page:
 
 ```
-<polymer-paginator perpage="5" currentpage="3"></polymer-paginator>
+<polymer-paginator currentpage="3" perpage="5"></polymer-paginator>
 ```
 
 Customize next and previous labels:
