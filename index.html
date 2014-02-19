@@ -82,11 +82,14 @@
 		});
 	}
 
-	// Set the model data on our grid/table
-	t.model = model;
-
-	// Set the model data on our paginator
+	// Activate the model data on our paginator
 	m.model = model;
+
+	// When Polymer (and our paginator) are ready..
+	document.addEventListener('polymer-ready', function() {
+		// Activate the model data on our grid/table
+		t.model = model;
+	});
 	</script>
 </body>
 </html>
