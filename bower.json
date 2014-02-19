@@ -1,12 +1,12 @@
 {
-  "name": "polymer-paginator",
-  "version": "0.0.1",
-  "homepage": "https://github.com/addyosmani/polymer-paginator",
+  "name": "x-paginator",
+  "version": "0.0.2",
+  "homepage": "https://github.com/addyosmani/x-paginator",
   "authors": [
     "Addy Osmani <addyosmani@gmail.com>"
   ],
   "description": "A Polymer element for pagination",
-  "main": "src/polymer-paginator.html",
+  "main": "src/x-paginator.html",
   "keywords": [
     "polymer",
     "web-component",

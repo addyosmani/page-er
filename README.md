@@ -1,4 +1,4 @@
-# &lt;polymer-paginator&gt;
+# &lt;x-paginator&gt;
 
 A Polymer element for paginating model data
 
@@ -6,14 +6,14 @@ A Polymer element for paginating model data
 
 ## Demo
 
-> [Check it live](http://addyosmani.github.io/polymer-paginator).
+> [Check it live](http://addyosmani.github.io/x-paginator).
 
 ## Installation
 
 Using [Bower](http://bower.io), run:
 
 ```shell
-bower install polymer-paginator
+bower install x-paginator
 ```
 
 ## Usage
@@ -27,13 +27,13 @@ bower install polymer-paginator
 2. Import Custom Element:
 
     ```html
-    <link rel="import" href="src/polymer-paginator.html">
+    <link rel="import" href="src/x-paginator.html">
     ```
 
 3. Start using it!
 
     ```html
-    <polymer-paginator><polymer-paginator>
+    <x-paginator><x-paginator>
     ```
 
 ## Examples
@@ -41,25 +41,25 @@ bower install polymer-paginator
 Basic usage:
 
 ```
-<polymer-paginator></polymer-paginator>
+<x-paginator></x-paginator>
 ```
 
 Set items per page:
 
 ```
-<polymer-paginator perpage="5"></polymer-paginator>
+<x-paginator perpage="5"></x-paginator>
 ```
 
 Set current page and items per page:
 
 ```
-<polymer-paginator currentpage="3" perpage="5"></polymer-paginator>
+<x-paginator currentpage="3" perpage="5"></x-paginator>
 ```
 
 Customize next and previous labels:
 
 ```
-<polymer-paginator previous="Previous!" next="Next!" ></polymer-paginator>
+<x-paginator previous="Previous!" next="Next!" ></x-paginator>
 ```
 
 ## Setup

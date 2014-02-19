@@ -1,23 +1,23 @@
 <!--
 /**
- * @module polymer-paginator
+ * @module x-paginator
  */
 /**
  * Element paginates arbitrary model data
  *
- * polymer-paginator is an element for paginating
+ * x-paginator is an element for paginating
  * model data. It renders a set of pagination controls
  * for navigating through a collection of data.
  *
  * Examples:
  *
- *     <polymer-paginator></polymer-paginator>
+ *     <x-paginator></x-paginator>
  *
- *     <polymer-paginator perpage="5" currentpage="0"></polymer-paginator>
+ *     <x-paginator perpage="5" currentpage="0"></x-paginator>
  *
- *     <polymer-paginator next="Next >" previous="< Previous "></polymer-paginator>
+ *     <x-paginator next="Next >" previous="< Previous "></x-paginator>
  *
- * @class polymer-paginator
+ * @class x-paginator
  * @blurb Paginate arbitary model data
  * @author Addy Osmani
  * @categories Data
@@ -25,7 +25,7 @@
  */
 -->
 <link rel="import" href="../app/bower_components/polymer/polymer.html">
-<polymer-element name="polymer-paginator" attributes="perpage currentpage next previous">
+<polymer-element name="x-paginator" attributes="perpage currentpage next previous">
 	<template>
 		<style>
 		.pagination {
@@ -93,7 +93,7 @@
 			</div>
 	</template>
 	<script>
-	Polymer('polymer-paginator', {
+	Polymer('x-paginator', {
 		/**
 		 * perpage: the number of items to show per page
 		 * @type {Number}
