@@ -164,21 +164,35 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       // Update model bound to UI with filtered range
       this.model.items = this.filterPage();
     },
-    
+
+    /**
+     * Called when navigating to the previous page
+     *
+     * @param {Object} page
+     * @event pager-previous
+     */
     prevPage: function () {
       if ( this.currentpage > 0 ) {
         this.currentpage--;
+        this.fire('pager-previous', { page: this.currentpage });
       }
     },
 
-    prevPageDisabled: function () {
-      return this.currentpage === 0 ? "disabled" : "";
-    },
-
+    /**
+     * Called when navigating to the next page
+     *
+     * @param {Object} page
+     * @event pager-next
+     */
     nextPage: function () {
       if ( this.currentpage < this.getPageCount() ) {
         this.currentpage++;
+        this.fire('pager-next', { page: this.currentpage });
       }
+    },
+    
+    prevPageDisabled: function () {
+      return this.currentpage === 0 ? "disabled" : "";
     },
 
     nextPageDisabled: function() {
