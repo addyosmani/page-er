@@ -1,0 +1,9 @@
+{
+  "name": "page-er",
+  "version": "0.0.3",
+  "keywords": "pagination, paginate, web-components",
+  "main": "page-er.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.4"
+  }
+}
