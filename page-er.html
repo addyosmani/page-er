@@ -149,7 +149,8 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      * @type string
      */
     next: "Next >>",
-    ready: function() {
+
+    ready: function () {
 
       // Cache model data so we can work against this.model directly
       this.items = this.model.items;
@@ -163,17 +164,18 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       // Update model bound to UI with filtered range
       this.model.items = this.filterPage();
     },
-    prevPage: function() {
+    
+    prevPage: function () {
       if ( this.currentpage > 0 ) {
         this.currentpage--;
       }
     },
 
-    prevPageDisabled: function() {
+    prevPageDisabled: function () {
       return this.currentpage === 0 ? "disabled" : "";
     },
 
-    nextPage: function() {
+    nextPage: function () {
       if ( this.currentpage < this.getPageCount() ) {
         this.currentpage++;
       }
@@ -183,18 +185,20 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       return this.currentpage === this.getPageCount() ? "disabled" : "";
     },
 
-    getPageCount: function() {
+    getPageCount: function () {
       return Math.ceil( this.items.length / this.perpage ) - 1;
     },
 
-    setPage: function(e,d,t) {
+    setPage: function (e,d,t) {
       this.currentpage = parseInt( t.dataset.item, 10 );
     },
-    currentpageChanged: function(){
+
+    currentpageChanged: function () {
       this.model.items = this.filterPage();
       this.currentRange = this.range(); 
     },
-    range: function() {
+
+    range: function () {
       var paginations = [];
       var start = this.currentpage;
 
@@ -207,7 +211,8 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       }
       return paginations;
     },
-    filterPage: function() {
+
+    filterPage: function () {
       return this.items.slice(this.currentpage * this.perpage, (this.currentpage * this.perpage) + this.perpage);
     }
   });
