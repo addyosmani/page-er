@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>page-er Demo</title>
+
+  <script src="../platform/platform.js"></script>
+  <link rel="import" href="page-er.html">
+  <style>
+	.container{
+		margin: 0 auto;
+		width: 960px;
+	}
+	table {
+		border: 1px solid #eeeeee;
+		border-collapse: collapse;
+		border-spacing: 0;
+		width: 100%;
+	}
+	table th, table td {
+		text-align: center;
+		padding: 6px;
+	}
+	tbody > tr:nth-child(2n+1) > td, tbody > tr:nth-child(2n+1) > th {
+		background-color: #eeeeee;
+	}
+	</style>  
+</head>
+<body unresolved>
+
+  <p>An `page-er` looks like this:</p>
+
+  <page-er></page-er>
+
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Item name</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<template id="items" repeat="{{items}}">
+				<tr>
+					<td>{{id}}</td>
+					<td>{{name}}</td>
+					<td>{{description}}</td>
+				</tr>
+			</template>
+		</tbody>
+	</table>
+
+	<!-- Using Custom Elements -->
+	<page-er perpage="5" currentpage="0"></page-er>
+
+	<h3>Usage</h3>
+
+	<p>Basic usage:</p>
+	<pre>
+		&lt;page-er&gt;&lt;/page-er&gt;
+	</pre>
+
+	<p>Set items per page:</p>
+	<pre>
+		&lt;page-er perpage="5"&gt;&lt;/page-er&gt;
+	</pre>
+
+	<p>Set current page and items per page:</p>
+	<pre>
+		&lt;page-er currentpage="3" perpage="5"&gt;&lt;/page-er&gt;
+	</pre>
+
+	<p>Customize next and previous labels:</p>
+	<pre>
+		&lt;page-er previous="Previous!" next="Next!" &gt;&lt;/page-er&gt;
+	</pre>
+</div>
+<script>
+	// Select the grid/table where your main data will appear
+	var t = document.querySelector("#items");
+
+	// Select the paginator to use with this element
+	var m = document.querySelector("page-er");
+
+	// Create a model we will populate with data
+	var model = {
+		items: []
+	};
+
+	// As this is an example, populate some sample data inside
+	for (var i = 1; i < 50; i++) {
+		model.items.push({
+			id: i,
+			name: "Item "+ i,
+			description: "description " + i
+		});
+	}
+
+	// Activate the model data on our paginator
+	m.model = model;
+
+	// When Polymer (and our paginator) are ready..
+	document.addEventListener('polymer-ready', function() {
+		// Activate the model data on our grid/table
+		t.model = model;
+	});
+</script>
+</body>
+</html>
