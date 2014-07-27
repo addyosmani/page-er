@@ -179,6 +179,19 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     },
 
     /**
+     * Updates the current page if the page is in bound
+     *
+     * @param {string} page
+     * @method changePage
+     */
+    changePage: function (page) {
+      var desiredPage = parseInt(page, 10);
+      if (desiredPage <= this.getPageCount()) {
+        this.currentpage = desiredPage;
+      }
+    },
+
+    /**
      * Called when navigating to the next page
      *
      * @param {Object} page
