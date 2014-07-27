@@ -5,6 +5,7 @@
   "main": "page-er.html",
   "dependencies": {
     "polymer": "Polymer/polymer#~0.3.4",
-    "flatiron-director": "PolymerLabs/flatiron-director#~0.3.0"
+    "flatiron-director": "PolymerLabs/flatiron-director#~0.3.0",
+    "core-ajax": "Polymer/core-ajax#~0.3.4"
   }
 }
