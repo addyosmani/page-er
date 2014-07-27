@@ -16,7 +16,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
 @status alpha
 @homepage http://addyosmani.github.io/page-er
 -->
-<polymer-element name="page-er" attributes="perpage currentpage next previous data">
+<polymer-element name="page-er" attributes="perpage currentpage next previous rangeSize data">
   <template>
     <style>
     .pagination {
@@ -111,8 +111,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     currentRange: [],
     /**
-     * The `pageCount` attribute specifies the number of 
-     * paginated pages
+     * The `pageCount` specifies the number of paginated pages
      *
      * @property pageCount
      * @type number
