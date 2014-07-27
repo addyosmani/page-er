@@ -190,7 +190,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
         this.fire('pager-next', { page: this.currentpage });
       }
     },
-    
+
     prevPageDisabled: function () {
       return this.currentpage === 0 ? "disabled" : "";
     },
@@ -207,9 +207,16 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       this.currentpage = parseInt( t.dataset.item, 10 );
     },
 
+    /**
+     * Called when the current page changes
+     *
+     * @param {Object} page
+     * @event pager-change
+     */
     currentpageChanged: function () {
       this.model.items = this.filterPage();
       this.currentRange = this.range(); 
+      this.fire('pager-change', { page: this.currentpage });
     },
 
     range: function () {
