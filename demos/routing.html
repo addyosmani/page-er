@@ -103,16 +103,17 @@
 		});
 	}
 
-	// Activate the model data on our paginator
-	m.model = model;
 
 	// When Polymer (and our paginator) are ready..
 	document.addEventListener('polymer-ready', function() {
-		// Activate the model data on our grid/table
-		t.model = model;
+		// Activate the model data on our paginator
+		m.model = model;
 	});
 
 	document.addEventListener('director-route', function(e) {
+		if(m.data.length <= 0){
+			m.data = model.items;
+		}
 		m.changePage(r.route);
 	});
 
@@ -121,6 +122,18 @@
 	});
 
 	document.addEventListener('pager-previous', function(e) {
+		r.route = e.detail.page;
+	});
+
+	document.addEventListener('pager-data', function(e) {
+		// The original model set has been paged
+		// Update the current view
+		t.model = { items: e.detail.data };
+	});
+
+	// Anytime our paged set changes, update the template
+	document.addEventListener('pager-change', function(e) {
+		t.model = { items: e.detail.data };
 		r.route = e.detail.page;
 	});
 </script>

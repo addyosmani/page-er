@@ -16,7 +16,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
 @status alpha
 @homepage http://addyosmani.github.io/page-er
 -->
-<polymer-element name="page-er" attributes="perpage currentpage next previous">
+<polymer-element name="page-er" attributes="perpage currentpage next previous data">
   <template>
     <style>
     .pagination {
@@ -78,7 +78,6 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
               <button>{{n+1}}</button>
             </li>
           </template>
-
           <li class='{{currentpage === pageCount? "disabled" : ""}}'>
             <button on-click="{{nextPage}}">{{next}}</button>
           </li>
@@ -133,6 +132,14 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      * @type array
      */
     items: [],
+
+    /**
+     * The `data` attribute is the complete set of data we wish to be paginated
+     *
+     * @attribute data
+     * @type array
+     */
+    data: [],
     /**
      * The `previous` attribute specifies the label 
      * for the Previous button
@@ -150,10 +157,9 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     next: "Next >>",
 
-    ready: function () {
+    dataChanged: function(){
 
-      // Cache model data so we can work against this.model directly
-      this.items = this.model.items;
+      // this.data is the complete original set of data
 
       // Update current range to account for items per page, range.
       this.currentRange = this.range();
@@ -162,7 +168,11 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       this.pageCount =  this.getPageCount();
 
       // Update model bound to UI with filtered range
-      this.model.items = this.filterPage();
+      // Source of truth for the component
+      this.items = this.filterPage();
+
+      // Fire event for once model data is paged
+      this.fire('pager-data', { data: this.items });
     },
 
     /**
@@ -213,7 +223,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     },
 
     getPageCount: function () {
-      return Math.ceil( this.items.length / this.perpage ) - 1;
+      return Math.ceil( this.data.length / this.perpage ) - 1;
     },
 
     setPage: function (e,d,t) {
@@ -227,9 +237,9 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      * @event pager-change
      */
     currentpageChanged: function () {
-      this.model.items = this.filterPage();
+      this.items = this.filterPage();
       this.currentRange = this.range(); 
-      this.fire('pager-change', { page: this.currentpage });
+      this.fire('pager-change', { page: this.currentpage, data: this.items });
     },
 
     range: function () {
@@ -247,7 +257,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     },
 
     filterPage: function () {
-      return this.items.slice(this.currentpage * this.perpage, (this.currentpage * this.perpage) + this.perpage);
+      return this.data.slice(this.currentpage * this.perpage, (this.currentpage * this.perpage) + this.perpage);
     }
   });
   </script>

@@ -101,29 +101,22 @@
 		});
 	}
 
-	// Activate the model data on our paginator
-	m.model = model;
-
-	// When Polymer (and our paginator) are ready..
 	document.addEventListener('polymer-ready', function() {
-		// Activate the model data on our grid/table
-		t.model = model;
+		// 1. Pass as `data` the set of data we want the 
+		// paginator to paginate
+		m.data = model.items;
 	});
 
+	document.addEventListener('pager-data', function(e) {
+		// 2. Update the current template/view with our
+		// paginated set of data. `pager-data` is fired
+		// when this has completed
+		t.model = { items: e.detail.data };
+	});
+
+	// 3. Anytime our paged set changes, update the view
 	document.addEventListener('pager-change', function(e) {
-		console.log('change', e);
-	});
-
-	document.addEventListener('pager-next', function(e) {
-		console.log('next', e);
-	});
-
-	document.addEventListener('pager-previous', function(e) {
-		console.log('prev', e);
-	});
-
-	document.addEventListener('director-route', function(e) {
-		console.log(e);
+		t.model = { items: e.detail.data };
 	});
 </script>
 </body>
