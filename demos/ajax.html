@@ -22,6 +22,7 @@
 		border-collapse: collapse;
 		border-spacing: 0;
 		width: 100%;
+		text-align: left;
 	}
 	table th, table td {
 		text-align: center;
@@ -29,6 +30,9 @@
 	}
 	tbody > tr:nth-child(2n+1) > td, tbody > tr:nth-child(2n+1) > th {
 		background-color: #eeeeee;
+	}
+	tr td img {
+		width: 200px;
 	}
 	</style>  
 </head>
@@ -48,14 +52,18 @@
 	<table>
 		<thead>
 			<tr>
+				<th>Thumbnail</th>
 				<th>Title</th>
-				<th>YouTube Link</th>
+				<th>Length</th>
+				<th>Link</th>
 			</tr>
 		</thead>
 		<tbody>
 			<template id="items" repeat="{{items.feed.entry}}">
 				<tr>
+					<td><img src="{{media$group.media$thumbnail[0].url}}"/></td>
 					<td>{{title.$t}}</td>
+					<td>{{yt$duration.seconds}}s</td>
 					<td><a href="{{link[0].href}}">Watch video</a></td>
 				</tr>
 			</template>
@@ -79,6 +87,7 @@
 		ajax.addEventListener("core-response", 
 			function(e) {
 				 model = { items: e.detail.response };
+				 console.log(model);
 			 	 t.model = model;
 			 	 m.data = model.items.feed.entry;
 			 	 if (r.route > 0){
