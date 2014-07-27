@@ -4,6 +4,7 @@
   "keywords": "pagination, paginate, web-components",
   "main": "page-er.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.3.4"
+    "polymer": "Polymer/polymer#~0.3.4",
+    "flatiron-director": "PolymerLabs/flatiron-director#~0.3.0"
   }
 }
