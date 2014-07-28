@@ -70,6 +70,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     </style>
       <div class="pagination">
         <ul>
+          <li><button on-click="{{firstPage}}">First</button></li>
           <li class='{{currentpage === 0 ? "disabled" : ""}}'>
             <button on-click="{{prevPage}}">{{previous}}</button>
           </li>
@@ -81,6 +82,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
           <li class='{{currentpage === pageCount? "disabled" : ""}}'>
             <button on-click="{{nextPage}}">{{next}}</button>
           </li>
+          <li><button on-click="{{lastPage}}">Last</button></li>
         </ul>
       </div>
   </template>
@@ -131,7 +133,6 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      * @type array
      */
     items: [],
-
     /**
      * The `data` attribute is the complete set of data we
      * wish to be paginated
@@ -176,10 +177,34 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     },
 
     /**
+     * Navigate to the first page
+     *
+     * @method firstPage
+     */
+    firstPage: function () {
+      this.currentpage = 0;
+    },
+
+    /**
+     * Navigate to the last page
+     *
+     * @method lastPage
+     */
+    lastPage: function () {
+      this.currentpage = this.pageCount;
+    },
+
+    /**
      * Called when navigating to the previous page
      *
      * @param {Object} page
      * @event pager-previous
+     */
+
+    /**
+     * Navigate to the previous page
+     *
+     * @method prevPage
      */
     prevPage: function () {
       if ( this.currentpage > 0 ) {
@@ -193,6 +218,12 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      *
      * @param {Object} page
      * @event pager-next
+     */
+
+    /**
+     * Navigate to the next page
+     *
+     * @method nextPage
      */
     nextPage: function () {
       if ( this.currentpage < this.getPageCount() ) {
