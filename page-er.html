@@ -250,14 +250,14 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       var paginations = [];
       var start = this.currentpage;
 
-
       if ( start > this.getPageCount() - this.rangeSize ) {
         start = this.getPageCount() - this.rangeSize + 1;
       }
-      // start
+
       for ( var i = 0; i < start + this.rangeSize; i++ ) {
         paginations.push(i);
       }
+
       return paginations;
     },
 
