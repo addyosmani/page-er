@@ -87,7 +87,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
   <script>
   Polymer('page-er', {
     /**
-     * The `perpage` attribute defines the number 
+     * The `perpage` attribute defines the number
      * of items to show per page
      *
      * @attribute perpage
@@ -95,7 +95,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     perpage: 10,
     /**
-     * The `currentpage` attribute specifies the 
+     * The `currentpage` attribute specifies the
      * current active page in view
      *
      * @attribute currentpage
@@ -103,7 +103,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     currentpage: 0,
     /**
-     * The `currentRange` property specifies the 
+     * The `currentRange` property specifies the
      * range of pages (e.g 1, 2, 3, 4, 5) to display
      *
      * @property currentRange
@@ -133,7 +133,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     items: [],
 
     /**
-     * The `data` attribute is the complete set of data we 
+     * The `data` attribute is the complete set of data we
      * wish to be paginated
      *
      * @attribute data
@@ -141,7 +141,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     data: [],
     /**
-     * The `previous` attribute specifies the label 
+     * The `previous` attribute specifies the label
      * for the Previous button
      *
      * @attribute previous
@@ -149,7 +149,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     previous: "<< Prev",
     /**
-     * The `next` attribute specifies the label 
+     * The `next` attribute specifies the label
      * for the Next button
      *
      * @attribute next
@@ -189,19 +189,6 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     },
 
     /**
-     * Updates the current page if the page is in bound
-     *
-     * @param {string} page
-     * @method changePage
-     */
-    changePage: function (page) {
-      var desiredPage = parseInt(page, 10);
-      if (desiredPage <= this.getPageCount()) {
-        this.currentpage = desiredPage;
-      }
-    },
-
-    /**
      * Called when navigating to the next page
      *
      * @param {Object} page
@@ -211,6 +198,19 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
       if ( this.currentpage < this.getPageCount() ) {
         this.currentpage++;
         this.fire('pager-next', { page: this.currentpage });
+      }
+    },
+
+    /**
+     * Updates the current page if the page is in bound
+     *
+     * @param {string} page
+     * @method changePage
+     */
+    changePage: function (page) {
+      var desiredPage = parseInt(page, 10);
+      if (desiredPage <= this.getPageCount()) {
+        this.currentpage = desiredPage;
       }
     },
 
@@ -238,19 +238,24 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
      */
     currentpageChanged: function () {
       this.items = this.filterPage();
-      this.currentRange = this.range(); 
+      this.currentRange = this.range();
       this.fire('pager-change', { page: this.currentpage, data: this.items });
+    },
+
+    perpageChanged: function () {
+      this.currentpageChanged();
     },
 
     range: function () {
       var paginations = [];
       var start = this.currentpage;
 
+
       if ( start > this.getPageCount() - this.rangeSize ) {
         start = this.getPageCount() - this.rangeSize + 1;
       }
-
-      for ( var i = start; i < start + this.rangeSize; i++ ) {
+      // start
+      for ( var i = 0; i < start + this.rangeSize; i++ ) {
         paginations.push(i);
       }
       return paginations;

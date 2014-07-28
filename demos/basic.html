@@ -28,15 +28,15 @@
 	tbody > tr:nth-child(2n+1) > td, tbody > tr:nth-child(2n+1) > th {
 		background-color: #eeeeee;
 	}
-	</style>  
+	</style>
 </head>
 <body unresolved>
 
 <p>An `page-er` looks like this:</p>
 
 <!-- Using Custom Elements -->
-<page-er perpage="8"></page-er>
-	
+<page-er perpage="5"></page-er>
+
 <div class="container">
 	<table>
 		<thead>
@@ -58,27 +58,15 @@
 	</table>
 
 
-	<h3>Usage</h3>
+  <select name="options" id="options">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+    <option value="25">25</option>
+  </select>
+  <span>per page</span>
 
-	<p>Basic usage:</p>
-	<pre>
-		&lt;page-er&gt;&lt;/page-er&gt;
-	</pre>
-
-	<p>Set items per page:</p>
-	<pre>
-		&lt;page-er perpage="5"&gt;&lt;/page-er&gt;
-	</pre>
-
-	<p>Set current page and items per page:</p>
-	<pre>
-		&lt;page-er currentpage="3" perpage="5"&gt;&lt;/page-er&gt;
-	</pre>
-
-	<p>Customize next and previous labels:</p>
-	<pre>
-		&lt;page-er previous="Previous!" next="Next!" &gt;&lt;/page-er&gt;
-	</pre>
 </div>
 <script>
 	// Select the grid/table where your main data will appear
@@ -86,6 +74,9 @@
 
 	// Select the paginator to use with this element
 	var m = document.querySelector("page-er");
+
+  // Select options
+  var s = document.querySelector("#options");
 
 	// Create a model we will populate with data
 	var model = {
@@ -102,7 +93,7 @@
 	}
 
 	document.addEventListener('polymer-ready', function() {
-		// 1. Pass as `data` the set of data we want the 
+		// 1. Pass as `data` the set of data we want the
 		// paginator to paginate
 		m.data = model.items;
 	});
@@ -118,6 +109,10 @@
 	document.addEventListener('pager-change', function(e) {
 		t.model = { items: e.detail.data };
 	});
+
+  options.addEventListener('change', function(e){
+    m.perpage = this.options[this.selectedIndex].value;
+  });
 </script>
 </body>
 </html>
