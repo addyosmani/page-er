@@ -41,6 +41,10 @@ page-er::shadow .pagination li button {
   padding: 8px 12px;
 }
 
+page-er::shadow .pagination li button:hover {
+  background: #303F9F;
+}
+
 page-er::shadow .pagination li.active button {
   background: #E91E63;
 }
