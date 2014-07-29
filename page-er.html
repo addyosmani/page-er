@@ -19,26 +19,27 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
 <polymer-element name="page-er" attributes="perpage currentpage next previous rangeSize data customTemplate">
   <template>
     <template ref="itemTemplate" id="template" bind="{{scope}}">
-        <!--filled-->
+        <!-- Filled with light DOM content if customTemplate is true -->
     </template>
     <link rel="stylesheet" href="page-er.css">
     <div class="pagination" id="pagination">
+      <!-- By default, if no customTemplate is supplied use our own -->
         <template if="{{!customTemplate}}" id="template">
-        <ul>
-          <li><button on-click="{{firstPage}}">First</button></li>
-          <li class='{{currentpage === 0 ? "disabled" : ""}}'>
-            <button on-click="{{prevPage}}">{{previous}}</button>
-          </li>
-          <template repeat="{{n in currentRange}}">
-            <li class="{{n == currentpage ? 'active' : ''}}" data-item="{{n}}" on-click="{{setPage}}">
-              <button>{{n+1}}</button>
+          <ul>
+            <li><button on-click="{{firstPage}}">First</button></li>
+            <li class='{{currentpage === 0 ? "disabled" : ""}}'>
+              <button on-click="{{prevPage}}">{{previous}}</button>
             </li>
-          </template>
-          <li class='{{currentpage === pageCount? "disabled" : ""}}'>
-            <button on-click="{{nextPage}}">{{next}}</button>
-          </li>
-          <li><button on-click="{{lastPage}}">Last</button></li>
-        </ul>
+            <template repeat="{{n in currentRange}}">
+              <li class="{{n == currentpage ? 'active' : ''}}" data-item="{{n}}" on-click="{{setPage}}">
+                <button>{{n+1}}</button>
+              </li>
+            </template>
+            <li class='{{currentpage === pageCount? "disabled" : ""}}'>
+              <button on-click="{{nextPage}}">{{next}}</button>
+            </li>
+            <li><button on-click="{{lastPage}}">Last</button></li>
+          </ul>
       </template>
       </div>
   </template>
@@ -254,13 +255,19 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
     },
 
     ready: function () {
-      if(this.customTemplate){
-      this.scope = this;
-      var pl = document.createElement('template');
-      pl.id = "itemTemplate";
-      pl.innerHTML = this.innerHTML;
-      this.shadowRoot.appendChild(pl);
-    }
+      if (this.customTemplate) {
+        /* The custom layout for your pagination controls will likely
+           use templates, which we will need to re-bind to data within
+           the scope of this element. The .scope hack below gives us
+           a reference to the element scope that we can bind to, populating
+           your supplied template accordingly. We will update this if we
+           find a better way to handle it.*/
+        this.scope = this;
+        var tmpl = document.createElement('template');
+        tmpl.id = "itemTemplate";
+        tmpl.innerHTML = this.innerHTML;
+        this.shadowRoot.appendChild(tmpl);
+      }
     }
   });
   </script>
