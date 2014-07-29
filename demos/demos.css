@@ -5,6 +5,7 @@
 body {
   font-family: 'RobotoDraft', 'Helvetica', 'Arial', sans-serif;
 }
+
 .container {
   margin: 0 auto;
   width: 960px;
@@ -51,4 +52,30 @@ page-er::shadow .pagination li.active button {
 
 page-er::shadow .pagination li.disabled button {
   background: #B1B9E1;
+}
+
+/* For the paper.html demo */
+
+page-er::shadow .pagination li.active paper-button {
+  background: #E91E63;
+}
+
+page-er::shadow paper-button.colored {
+  color: #4285f4;
+  fill: #4285f4;
+}
+
+page-er::shadow paper-button[raisedButton].colored {
+  background: #4285f4;
+  color: #fff;
+}
+
+page-er::shadow paper-button[raisedButton].colored #ripple,
+page-er::shadow paper-button[raisedButton].colored::shadow #ripple {
+  color: #2a56c6;
+}
+
+page-er::shadow paper-button[raisedButton].colored #focusBg,
+page-er::shadow paper-button[raisedButton].colored::shadow #focusBg {
+  background: #3367d6;
 }
