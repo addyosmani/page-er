@@ -6,6 +6,13 @@
   "dependencies": {
     "polymer": "Polymer/polymer#~0.3.4",
     "flatiron-director": "PolymerLabs/flatiron-director#~0.3.0",
-    "core-ajax": "Polymer/core-ajax#~0.3.4"
+    "core-ajax": "Polymer/core-ajax#~0.3.4",
+    "paper-button": "Polymer/paper-button#~0.3.4"
+  },
+  "resolutions": {
+    "core-icon": "master",
+    "core-iconset": "master",
+    "core-icons": "master",
+    "core-iconset-svg": "master"
   }
 }
