@@ -18,56 +18,7 @@ Element paginates arbitrary model data. It renders a set of pagination controls 
 -->
 <polymer-element name="page-er" attributes="perpage currentpage next previous rangeSize data">
   <template>
-    <style>
-    .pagination {
-      margin: 30px 0 10px 0;
-      text-align: center;
-    }
-    .pagination ul {
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-    }
-    .pagination li {
-      display: inline;
-      line-height: 20px;
-    }
-    .pagination li.active button {
-      background: #2BA6CB;
-      color: #fff;
-    }
-    .pagination li.disabled button {
-      color: #ccc;
-      cursor: no-drop;
-    }
-    .pagination li:first-child button {
-      -webkit-border-radius: 5px 0 0 5px;
-      -moz-border-radius: 5px 0 0 5px;
-      border-radius: 5px 0 0 5px;
-    }
-    .pagination li:last-child button {
-      -webkit-border-radius: 0 5px 5px 0;
-      -moz-border-radius: 0 5px 5px 0;
-      border-radius: 0 5px 5px 0;
-    }
-    .pagination li  button {
-      background-color: #fff;
-      border: 1px solid #eeeeee;
-      color: #2BA6CB;
-      cursor: pointer;
-      float: left;
-      min-width: 40px;
-      line-height: 20px;
-      padding: 4px 12px;
-      text-decoration: none;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    </style>
+    <link rel="stylesheet" href="page-er.css">
       <div class="pagination">
         <ul>
           <li><button on-click="{{firstPage}}">First</button></li>
