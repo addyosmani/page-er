@@ -3,7 +3,7 @@
 */
 
 body {
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'RobotoDraft', 'Helvetica', 'Arial', sans-serif;
 }
 .container {
   margin: 0 auto;
@@ -27,4 +27,24 @@ tbody > tr:nth-child(2n+1) > th {
 
 tr td img {
   width: 200px;
+}
+
+/*
+  Customize pagination styling
+*/
+
+page-er::shadow .pagination li button {
+  color: white;
+  background: #3E50B4;
+  font-size: 1em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+
+page-er::shadow .pagination li.active button {
+  background: #E91E63;
+}
+
+page-er::shadow .pagination li.disabled button {
+  background: #B1B9E1;
 }
