@@ -8,33 +8,7 @@
   <link rel="import" href="../page-er.html">
   <link rel="import" href="../../flatiron-director/flatiron-director.html">
   <link rel="import" href="../../core-ajax/core-ajax.html">
-  <style>
-  	body {
-  		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  	}
-
-	.container{
-		margin: 0 auto;
-		width: 960px;
-	}
-	table {
-		border: 1px solid #eeeeee;
-		border-collapse: collapse;
-		border-spacing: 0;
-		width: 100%;
-		text-align: left;
-	}
-	table th, table td {
-		text-align: center;
-		padding: 6px;
-	}
-	tbody > tr:nth-child(2n+1) > td, tbody > tr:nth-child(2n+1) > th {
-		background-color: #eeeeee;
-	}
-	tr td img {
-		width: 200px;
-	}
-	</style>  
+  <link rel="stylesheet" href="demos.css"> 
 </head>
 <body unresolved>
 
@@ -44,7 +18,7 @@
 <page-er perpage="10" rangeSize="3"></page-er>
 
 <flatiron-director id="router" autoHash></flatiron-director>
-<core-ajax auto url="http://gdata.youtube.com/feeds/api/videos/" 
+<core-ajax auto url="http://gdata.youtube.com/feeds/api/videos/"
   params='{"alt":"json", "q":"chrome"}'
   handleAs="json"></core-ajax>
 
@@ -84,7 +58,7 @@
 	// When Polymer (and our paginator) are ready..
 	document.addEventListener('polymer-ready', function() {
 		var ajax = document.querySelector("core-ajax");
-		ajax.addEventListener("core-response", 
+		ajax.addEventListener("core-response",
 			function(e) {
 				 model = { items: e.detail.response };
 				 console.log(model);
