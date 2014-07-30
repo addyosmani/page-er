@@ -1,15 +1,47 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-Element paginates arbitrary model data. It renders a set of pagination controls for navigating through a collection of data.
+Element paginates model data, rendering a set of pagination controls for navigating through that data.
 
-##### Example
+##### Examples
 
     <page-er perpage="5"></page-er>
 
     <page-er perpage="10" currentpage="3"></page-er>
 
     <page-er next="Next >" previous="< Previous "></page-er>
+
+<div class="ntitle">Usage</div>
+
+<strong>Assume we have a model we want to paginate</strong>
+
+    var model = { items: [] }; // Assume this is populated
+
+<strong>Define a page-er in your page. Specify the items per page.
+
+    <page-er perpage="5"></page-er>
+
+<strong>When ready, set the <code>data</code> for the page-er</strong>
+
+    var pager = document.querySelector("page-er");
+
+    document.addEventListener('polymer-ready', function() {
+      pager.data = model.items;
+    });
+
+<strong>When page-er has paginated your data, set it as the model for your results template</strong>
+
+    var results = document.querySelector("template");
+      document.addEventListener('pager-data', function(e) {
+      results.model = { items: e.detail.data };
+    });
+
+<strong>When your selected page changes, also update the results template</strong>
+
+    document.addEventListener('pager-change', function(e) {
+      results.model = { items: e.detail.data };
+    });
+
 
 @element page-er
 @blurb Element paginates arbitrary model data
