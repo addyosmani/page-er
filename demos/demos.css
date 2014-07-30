@@ -4,12 +4,14 @@
 
 body {
   font-family: 'RobotoDraft', 'Helvetica', 'Arial', sans-serif;
+  margin-top: 90px;
 }
 
 .container {
   margin: 0 auto;
-  width: 960px;
+  width: 90%;
 }
+
 table {
   border: 1px solid #eeeeee;
   border-collapse: collapse;
@@ -33,6 +35,10 @@ tr td img {
 /*
   Customize pagination styling
 */
+
+page-er {
+  margin: 0 auto;
+}
 
 page-er::shadow .pagination li button {
   color: white;
@@ -78,4 +84,66 @@ page-er::shadow paper-button[raisedButton].colored::shadow #ripple {
 page-er::shadow paper-button[raisedButton].colored #focusBg,
 page-er::shadow paper-button[raisedButton].colored::shadow #focusBg {
   background: #3367d6;
+}
+
+/* Header styles */
+/* Taken from Web Starter Kit */
+
+.paper-shadow {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.paper-toolbar {
+  color: #fff;
+  background: #E51D64; /*#3F51B5;*/
+}
+
+.app-bar, .navdrawer-container, main {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.promote-layer {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.app-bar {
+  display: block;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.app-bar .logo {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: 1.3em;
+  margin: 0 16px;
+  padding: 0;
+  color: #fefefe;
+  float: none;
+  max-width: none;
+  font-weight: 400;
+  line-height: 64px;
+}
+
+.codesnippet {
+  background: black;
+  color: white;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.codesnippet .highlight-code {
+  color: #F5EA96;
+}
+
+.codesnippet .comment {
+  color: #62B1FE;
 }

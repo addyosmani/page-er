@@ -2,17 +2,23 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>page-er Demo</title>
+  <title>page-er Demo: core-ajax</title>
 
   <script src="../../platform/platform.js"></script>
   <link rel="import" href="../page-er.html">
   <link rel="import" href="../../flatiron-director/flatiron-director.html">
   <link rel="import" href="../../core-ajax/core-ajax.html">
-  <link rel="stylesheet" href="demos.css" shim-shadowdom> 
+  <link rel="stylesheet" href="demos.css" shim-shadowdom>
 </head>
 <body unresolved>
 
-<p>An `page-er` looks like this:</p>
+<header class="app-bar promote-layer paper-toolbar paper-shadow">
+  <div class="app-bar-container paper-toolbar">
+    <h1 class="logo">page-er with ajax data source</h1>
+  </div>
+</header>
+
+<p>A `page-er` looks like this:</p>
 
 <!-- Using Custom Elements -->
 <page-er perpage="10" rangeSize="3"></page-er>

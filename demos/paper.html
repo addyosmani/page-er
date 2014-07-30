@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>page-er Demo</title>
+  <title>page-er Demo: custom templates</title>
 
   <script src="../../platform/platform.js"></script>
   <link rel="import" href="../page-er.html">
@@ -14,7 +14,13 @@
 </head>
 <body unresolved>
 
-<p>An `page-er` looks like this:</p>
+<header class="app-bar promote-layer paper-toolbar paper-shadow">
+  <div class="app-bar-container paper-toolbar">
+    <h1 class="logo">page-er with a custom pagination template</h1>
+  </div>
+</header>
+
+<p>A `page-er` looks like this:</p>
 
 <!-- Using Custom Elements -->
 <page-er perpage="5" currentpage="0" customTemplate>
@@ -59,6 +65,40 @@
     </tbody>
   </table>
 
+<p>The custom pagination template used above looks like this and is defined inside the Light DOM:</p>
+
+<pre class="codesnippet">
+&lt;page-er perpage=&quot;5&quot; currentpage=&quot;0&quot; <strong>customTemplate&gt;</strong>
+<div class="highlight-code">
+  &lt;div class=&quot;pagination&quot;&gt;
+    &lt;ul&gt;
+      <span class="comment">&lt;!-- First page --&gt;</span>
+      &lt;li&gt;&lt;paper-button label=&quot;First&quot; on-click=&quot;{{firstPage}}&quot;&gt;&lt;/paper-button&gt;&lt;/li&gt;
+
+      <span class="comment">&lt;!-- Previous page --&gt;</span>
+      &lt;li class=&#39;{{currentpage === 0 ? &quot;disabled&quot; : &quot;&quot;}}&#39;&gt;
+        &lt;paper-button label=&quot;Previous&quot; on-click=&quot;{{prevPage}}&quot;&gt;&lt;/paper-button&gt;
+      &lt;/li&gt;
+
+      <span class="comment">&lt;!-- Pages (1...N) --&gt;</span>
+      &lt;template repeat=&quot;{{n in currentRange}}&quot;&gt;
+        &lt;li class=&quot;{{n == currentpage ? &#39;active&#39; : &#39;&#39;}}&quot; data-item=&quot;{{n}}&quot; on-click=&quot;{{setPage}}&quot;&gt;
+          &lt;paper-button raisedButton class=&quot;colored&quot; label=&quot;{{n+1}}&quot;&gt;{{n+1}}&lt;/button&gt;
+        &lt;/li&gt;
+      &lt;/template&gt;
+
+      <span class="comment">&lt;!-- Next page --&gt;</span>
+      &lt;li class=&#39;{{currentpage === pageCount? &quot;disabled&quot; : &quot;&quot;}}&#39;&gt;
+        &lt;paper-button on-click=&quot;{{nextPage}}&quot; label=&quot;Next&quot;&gt;&lt;/paper-button&gt;
+      &lt;/li&gt;
+
+      <span class="comment">&lt;!-- Last page --&gt;</span>
+      &lt;li&gt;&lt;paper-button label=&quot;Last&quot; on-click=&quot;{{lastPage}}&quot;&gt;&lt;/paper-button&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+</div>
+&lt;/page-er&gt;
+</pre>
 </div>
 <script>
   // Select the grid/table where your main data will appear
