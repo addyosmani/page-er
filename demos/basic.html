@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>page-er Demo</title>
+  <title>page-er Demo: basic</title>
 
   <script src="../../platform/platform.js"></script>
   <link rel="import" href="../page-er.html">
@@ -11,42 +11,82 @@
 </head>
 <body unresolved>
 
-<p>An `page-er` looks like this:</p>
+<header class="app-bar promote-layer paper-toolbar paper-shadow">
+  <div class="app-bar-container paper-toolbar">
+    <h1 class="logo">basic page-er</h1>
+  </div>
+</header>
 
-<!-- Using Custom Elements -->
-<page-er perpage="5"></page-er>
-
+<p>A `page-er` looks like this with some custom styles:</p>
 <div class="container">
-	<table>
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Item name</th>
-				<th>Description</th>
-			</tr>
-		</thead>
-		<tbody>
-			<template id="items" repeat="{{items}}">
-				<tr>
-					<td>{{id}}</td>
-					<td>{{name}}</td>
-					<td>{{description}}</td>
-				</tr>
-			</template>
-		</tbody>
-	</table>
+  <page-er perpage="5"></page-er>
+
+  	<table>
+  		<thead>
+  			<tr>
+  				<th>Id</th>
+  				<th>Item name</th>
+  				<th>Description</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<template id="items" repeat="{{items}}">
+  				<tr>
+  					<td>{{id}}</td>
+  					<td>{{name}}</td>
+  					<td>{{description}}</td>
+  				</tr>
+  			</template>
+  		</tbody>
+  	</table>
 
 
-  <select name="options" id="options">
-    <option value="5">5</option>
-    <option value="10">10</option>
-    <option value="15">15</option>
-    <option value="20">20</option>
-    <option value="25">25</option>
-  </select>
-  <span>per page</span>
+    <select name="options" id="options">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+    </select>
+    <span>per page</span>
+
+    <h2>Usage</h2>
+
+<h3>Assume we have a model we want to paginate</h3>
+<pre>
+var model = { items: [] }; // Assume this is populated
+</pre>
+
+<h3>Define a page-er in your page. Specify the items per page.</h3>
+<pre>&#x3C;page-er perpage=&#x22;5&#x22;&#x3E;&#x3C;/page-er&#x3E;</pre>
+
+<h3>When ready, set the <code>data</code> for the page-er</h3>
+<pre>
+var pager = document.querySelector("page-er");
+
+document.addEventListener('polymer-ready', function() {
+  pager.data = model.items;
+});
+</pre>
+
+<h3>When page-er has paginated your data, set it as the model for your results template</h3>
+<pre>
+var results = document.querySelector("template");
+document.addEventListener('pager-data', function(e) {
+  results.model = { items: e.detail.data };
+});
+</pre>
+
+<h3>When your selected page changes, also update the results template</h3>
+<pre>
+document.addEventListener('pager-change', function(e) {
+  results.model = { items: e.detail.data };
+});
+</pre>
 
 </div>
+
+
 <script>
 	// Select the grid/table where your main data will appear
 	var t = document.querySelector("#items");
