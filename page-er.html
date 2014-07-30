@@ -19,7 +19,7 @@ Element paginates model data, rendering a set of pagination controls for navigat
 
     var model = { items: [] }; // Assume this is populated
 
-<strong>Define a page-er in your page. Specify the items per page.
+<strong>Define a page-er in your page. Specify the items per page.</strong>
 
     <page-er perpage="5"></page-er>
 
@@ -44,6 +44,20 @@ Element paginates model data, rendering a set of pagination controls for navigat
       results.model = { items: e.detail.data };
     });
 
+<div class="ntitle">Styling</div>
+
+The <code>::shadow</code> selector selects shadow trees that are one level deep inside
+an element. We can use this selector to style the controls inside our paginator. For
+browsers that don't support the selector natively, we include the `shim-shadowdom`
+directive on any linked stylesheets being referenced.
+
+    page-er::shadow .pagination li.active button {
+      background: #E91E63;
+    }
+
+    page-er::shadow .pagination li.disabled button {
+      background: #B1B9E1;
+    }
 
 @element page-er
 @blurb Element paginates arbitrary model data
