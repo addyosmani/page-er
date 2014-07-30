@@ -50,40 +50,6 @@
     </select>
     <span>per page</span>
 
-    <h2>Usage</h2>
-
-<h3>Assume we have a model we want to paginate</h3>
-<pre>
-var model = { items: [] }; // Assume this is populated
-</pre>
-
-<h3>Define a page-er in your page. Specify the items per page.</h3>
-<pre>&#x3C;page-er perpage=&#x22;5&#x22;&#x3E;&#x3C;/page-er&#x3E;</pre>
-
-<h3>When ready, set the <code>data</code> for the page-er</h3>
-<pre>
-var pager = document.querySelector("page-er");
-
-document.addEventListener('polymer-ready', function() {
-  pager.data = model.items;
-});
-</pre>
-
-<h3>When page-er has paginated your data, set it as the model for your results template</h3>
-<pre>
-var results = document.querySelector("template");
-document.addEventListener('pager-data', function(e) {
-  results.model = { items: e.detail.data };
-});
-</pre>
-
-<h3>When your selected page changes, also update the results template</h3>
-<pre>
-document.addEventListener('pager-change', function(e) {
-  results.model = { items: e.detail.data };
-});
-</pre>
-
 </div>
 
 
