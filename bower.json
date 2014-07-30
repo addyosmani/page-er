@@ -1,6 +1,6 @@
 {
   "name": "page-er",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": "pagination, paginate, web-components",
   "main": "page-er.html",
   "dependencies": {
