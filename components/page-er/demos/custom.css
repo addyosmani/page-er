@@ -1,0 +1,182 @@
+/*
+  Styles for Polymer pagination element demos.
+*/
+
+body {
+  background: #414449;
+  color:#666;
+  font:14px/24px sans-serif;
+  margin-top: 90px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+  background: white;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+page-er::shadow .btn {
+  display:inline-block;
+  padding:10px;
+  border-radius:5px; /*optional*/
+  color:#aaa;
+  font-size:.875em;
+}
+
+page-er::shadow .pagination.dark {
+  padding:20px;
+}
+
+page-er::shadow .page {
+  display:inline-block;
+  padding:0px 9px;
+  margin-right:4px;
+  border-radius:3px;
+  border:solid 1px #c0c0c0;
+  background:#e9e9e9;
+  box-shadow:inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+  font-size:.875em;
+  font-weight:bold;
+  text-decoration:none;
+  color:#717171;
+  text-shadow:0px 1px 0px rgba(255,255,255, 1)
+}
+page-er::shadow .page:hover, page-er::shadow .page.gradient:hover {
+  background:#fefefe;
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+  background:-moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0)
+}
+page-er::shadow .page.active {
+  border:none;
+  background:#616161;
+  box-shadow:inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+  color:#f0f0f0;
+  text-shadow:0px 0px 3px rgba(0,0,0, .5);
+}
+
+page-er::shadow .page.gradient {
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f8f8), to(#e9e9e9));
+  background:-moz-linear-gradient(0% 0% 270deg,#f8f8f8, #e9e9e9)
+}
+
+page-er::shadow .pagination.dark {
+  background:#414449;
+  color:#feffff;
+}
+page-er::shadow .page.dark {
+  border:solid 1px #32373b;
+  background:#3e4347;
+  box-shadow:inset 0px 1px 1px rgba(255,255,255, .1), 0px 1px 3px rgba(0,0,0, .1);
+  color:#feffff;
+  text-shadow:0px 1px 0px rgba(0,0,0, .5)
+}
+page-er::shadow .page.dark:hover, page-er::shadow .page.dark.gradient:hover {
+  background:#3d4f5d;
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#547085), to(#3d4f5d));
+  background:-moz-linear-gradient(0% 0% 270deg,#547085, #3d4f5d)
+}
+page-er::shadow .page.dark.active {
+   background:#2f3237;
+   box-shadow:inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .1);
+}
+page-er::shadow .page.dark.gradient {
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#565b5f), to(#3e4347));
+  background:-moz-linear-gradient(0% 0% 270deg,#565b5f, #3e4347)
+}
+
+
+/*
+  Customize pagination styling
+*/
+
+.divTable {
+  display:table;               
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 800px;
+  margin: 0 auto;
+}
+.divRow {
+  display:table-row;
+  width:auto;
+  clear:both;
+  padding: 6px;
+  text-align: center;
+}
+.divCell {
+  float:left;
+  display:table-column;         
+  width:200px;          
+}
+.headRow {
+  font-weight: bold;
+  text-align: center;
+}
+
+page-er {
+  margin: 0 auto;
+}
+
+/* Header styles */
+/* Taken from Web Starter Kit */
+
+.paper-shadow {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.paper-toolbar {
+  color: #fff;
+  background: #000;
+}
+
+.app-bar, .navdrawer-container, main {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.promote-layer {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.app-bar {
+  display: block;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.app-bar .logo {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: 1.3em;
+  margin: 0 16px;
+  padding: 0;
+  color: #fefefe;
+  float: none;
+  max-width: none;
+  font-weight: 400;
+  line-height: 64px;
+}
+
+.codesnippet {
+  background: black;
+  color: white;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.codesnippet .highlight-code {
+  color: #F5EA96;
+}
+
+.codesnippet .comment {
+  color: #62B1FE;
+}

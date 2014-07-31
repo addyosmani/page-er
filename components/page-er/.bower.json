@@ -1,0 +1,29 @@
+{
+  "name": "page-er",
+  "description": "A Polymer element for paginating model data, rendering a set of pagination controls for navigating through that data.",
+  "keywords": "pagination, paginate, web-components",
+  "main": "page-er.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.4",
+    "flatiron-director": "PolymerLabs/flatiron-director#~0.3.0",
+    "core-ajax": "Polymer/core-ajax#~0.3.4",
+    "paper-button": "Polymer/paper-button#~0.3.4"
+  },
+  "resolutions": {
+    "core-icon": "master",
+    "core-iconset": "master",
+    "core-icons": "master",
+    "core-iconset-svg": "master"
+  },
+  "homepage": "https://github.com/addyosmani/page-er",
+  "_release": "640743428c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "640743428c162bd4abdca8ce3cdab445ab696eef"
+  },
+  "_source": "git://github.com/addyosmani/page-er.git",
+  "_target": "master",
+  "_originalSource": "addyosmani/page-er",
+  "_direct": true
+}

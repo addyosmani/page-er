@@ -1,0 +1,415 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A Polymer element for paginating model data, rendering a set of pagination controls for navigating through that data.
+
+<a href="demos/basic.html"><img src="http://i.imgur.com/4m71sz1.png" width="90%"/></a>
+
+<a href="demos/custom.html"><img src="http://i.imgur.com/Xb8ypzV.png" width="90%"/></a>
+
+#### Demos
+
+<ul>
+  <li><a href="demos/basic.html">Basic pagination</a>
+  </li>
+  <li><a href="demos/routing.html">Pagination with routing</a>
+  </li>
+  <li><a href="demos/ajax.html">Pagination, routing &amp; core-ajax</a>
+  </li>
+  <li><a href="demos/paper.html">Pagination, routing, custom pagination templates &amp; paper effects</a>
+  <li><a href="demos/custom.html">Dark themed custom pagination template</a>
+  </li>
+</ul>
+
+Note: Due to [limitations](https://github.com/Polymer/polymer/issues/671) out of our control with Polymer's polyfilling of `<template>` inside `<table>` elements, the above demos may not
+render correctly in Safari. A demo using `<div>`s for tables is [also available](demos/divtable.html) which does.
+
+#### Examples
+
+    <page-er perpage="5"></page-er>
+
+    <page-er perpage="10" currentpage="3"></page-er>
+
+    <page-er next="Next >" previous="< Previous "></page-er>
+
+<div class="ntitle">Installation</div>
+
+To install the element with Bower, run:
+
+    $ bower install page-er --save
+
+Alternatively, you can [download](https://github.com/addyosmani/page-er/releases) a release from the releases page.
+
+<div class="ntitle">Usage</div>
+
+<strong>Assume we have a model we want to paginate</strong>
+
+    var model = { items: [] }; // Assume this is populated
+
+<strong>Define a page-er in your page. Specify the items per page.</strong>
+
+    <page-er perpage="5"></page-er>
+
+<strong>When ready, set the <code>data</code> for the page-er</strong>
+
+    var pager = document.querySelector("page-er");
+
+    document.addEventListener('polymer-ready', function() {
+      pager.data = model.items;
+    });
+
+<strong>When page-er has paginated your data, set it as the model for your results template</strong>
+
+    var results = document.querySelector("template");
+      document.addEventListener('pager-data', function(e) {
+      results.model = { items: e.detail.data };
+    });
+
+<strong>When your selected page changes, also update the results template</strong>
+
+    document.addEventListener('pager-change', function(e) {
+      results.model = { items: e.detail.data };
+    });
+
+<div class="ntitle">Styling</div>
+
+The <code>::shadow</code> selector selects shadow trees that are one level deep inside
+an element. We can use this selector to style the controls inside our paginator. For
+browsers that don't support the selector natively, we include the `shim-shadowdom`
+directive on any linked stylesheets being referenced.
+
+    page-er::shadow .pagination li.active button {
+      background: #E91E63;
+    }
+
+    page-er::shadow .pagination li.disabled button {
+      background: #B1B9E1;
+    }
+
+A [live demo](demos/basic.html) using custom styling is available.
+
+<div class="ntitle">Custom Pagination Templates</div>
+
+Custom templates for the pagination controls may be specified using the `customTemplate`
+attribute, passing in your template to the Light DOM of your `page-er` element.
+
+For example, if we wanted to use Polymer `<paper-button>`s instead of the default `<button>`
+we could define a custom template as follows:
+
+    <page-er perpage="5" currentpage="0" customTemplate>
+
+      <div class="pagination">
+        <ul>
+
+          <li><paper-button label="First" on-click="{{firstPage}}"></paper-button></li>
+
+          <li class='{{currentpage === 0 ? "disabled" : ""}}'>
+            <paper-button label="Previous" on-click="{{prevPage}}"></paper-button>
+          </li>
+
+          <template repeat="{{n in currentRange}}">
+            <li class="{{n == currentpage ? 'active' : ''}}" data-item="{{n}}" on-click="{{setPage}}">
+              <paper-button raisedButton class="colored" label="{{n+1}}">{{n+1}}</button>
+            </li>
+          </template>
+
+          <li class='{{currentpage === pageCount? "disabled" : ""}}'>
+            <paper-button on-click="{{nextPage}}" label="Next"></paper-button>
+          </li>
+
+          <li><paper-button label="Last" on-click="{{lastPage}}"></paper-button></li>
+        </ul>
+      </div>
+
+    </page-er>
+
+which would produce something like this:
+
+<img src="http://i.imgur.com/23TpUFy.png" width="80%"/>
+
+A [live demo](demos/paper.html) of the above is also available. The [dark themed](demos/custom.html) version you see earlier on also uses a custom template.
+
+<div class="ntitle">Routing</div>
+
+`page-er` doesn't include built in support for routing, but you are free to use a routing
+library or element of choice with it. In our [routing demo](demos/routing.html) we use the [flatiron-director](https://github.com/PolymerLabs/flatiron-director)
+element, updating the current paginated page based on the returned route:
+
+	document.addEventListener('director-route', function(e) {
+		pager.changePage(e.detail);
+	});
+
+<img src="http://i.imgur.com/eAHVwnc.png" width="60%"/>
+
+Whenever the paginator triggers a change in the paged set of data, we can similarly update the
+route:
+
+    document.addEventListener('pager-change', function(e) {
+      results.model = { items: e.detail.data };
+      router.route = e.detail.page;
+    });
+
+How you choose to approach routing (e.g URLs/routes first) is ultimately up to you and `page-er`
+is there to support you with model pagination foremost.
+
+@element page-er
+@blurb A Polymer element for paginating model data, rendering a set of pagination controls for navigating through that data.
+@status alpha
+@homepage http://github.com/addyosmani/page-er
+-->
+<polymer-element name="page-er" attributes="perpage currentpage next previous rangeSize data customTemplate">
+  <template>
+    <template ref="itemTemplate" id="template" bind="{{scope}}">
+        <!-- Filled with light DOM content if customTemplate is true -->
+    </template>
+    <link rel="stylesheet" href="page-er.css">
+    <div class="pagination">
+      <!-- By default, if no customTemplate is supplied use our own -->
+        <template if="{{!customTemplate}}" id="template">
+          <ul>
+            <li><button on-click="{{firstPage}}">First</button></li>
+            <li class='{{currentpage === 0 ? "disabled" : ""}}'>
+              <button on-click="{{prevPage}}">{{previous}}</button>
+            </li>
+            <template repeat="{{n in currentRange}}">
+              <li class="{{n == currentpage ? 'active' : ''}}" data-item="{{n}}" on-click="{{setPage}}">
+                <button>{{n+1}}</button>
+              </li>
+            </template>
+            <li class='{{currentpage === pageCount? "disabled" : ""}}'>
+              <button on-click="{{nextPage}}">{{next}}</button>
+            </li>
+            <li><button on-click="{{lastPage}}">Last</button></li>
+          </ul>
+      </template>
+      </div>
+  </template>
+  <script>
+  Polymer('page-er', {
+    /**
+     * The `perpage` attribute defines the number
+     * of items to show per page
+     *
+     * @attribute perpage
+     * @type number
+     */
+    perpage: 10,
+    /**
+     * The `currentpage` attribute specifies the
+     * current active page in view
+     *
+     * @attribute currentpage
+     * @type number
+     */
+    currentpage: 0,
+    /**
+     * The `currentRange` property specifies the
+     * range of pages (e.g 1, 2, 3, 4, 5) to display
+     *
+     * @property currentRange
+     * @type array
+     */
+    currentRange: [],
+    customTemplate: false,
+    /**
+     * The `pageCount` specifies the number of paginated pages
+     *
+     * @property pageCount
+     * @type number
+     */
+    pageCount: 0,
+    /**
+     * The `rangeSize` attribute specifies the total size * of the paginated range of items
+     *
+     * @attribute rangeSize
+     * @type number
+     */
+    rangeSize: 10,
+    /**
+     * The `items` property is the cached instance of the model data for pagination
+     *
+     * @property items
+     * @type array
+     */
+    items: [],
+    /**
+     * The `data` attribute is the complete set of data we
+     * wish to be paginated
+     *
+     * @attribute data
+     * @type array
+     */
+    data: [],
+    /**
+     * The `previous` attribute specifies the label
+     * for the Previous button
+     *
+     * @attribute previous
+     * @type string
+     */
+    previous: "<< Prev",
+    /**
+     * The `next` attribute specifies the label
+     * for the Next button
+     *
+     * @attribute next
+     * @type string
+     */
+    next: "Next >>",
+
+    dataChanged: function(){
+
+      // this.data is the complete original set of data
+
+      // Update current range to account for items per page, range.
+      this.currentRange = this.range();
+
+      // Cache the total page count
+      this.pageCount =  this.getPageCount();
+
+      // Update model bound to UI with filtered range
+      // Source of truth for the component
+      this.items = this.filterPage();
+
+      // Fire event for once model data is paged
+      this.fire('pager-data', { data: this.items });
+    },
+
+    /**
+     * Navigate to the first page
+     *
+     * @method firstPage
+     */
+    firstPage: function () {
+      this.currentpage = 0;
+    },
+
+    /**
+     * Navigate to the last page
+     *
+     * @method lastPage
+     */
+    lastPage: function () {
+      this.currentpage = this.pageCount;
+    },
+
+    /**
+     * Called when navigating to the previous page
+     *
+     * @param {Object} page
+     * @event pager-previous
+     */
+
+    /**
+     * Navigate to the previous page
+     *
+     * @method prevPage
+     */
+    prevPage: function () {
+      if ( this.currentpage > 0 ) {
+        this.currentpage--;
+        this.fire('pager-previous', { page: this.currentpage });
+      }
+    },
+
+    /**
+     * Called when navigating to the next page
+     *
+     * @param {Object} page
+     * @event pager-next
+     */
+
+    /**
+     * Navigate to the next page
+     *
+     * @method nextPage
+     */
+    nextPage: function () {
+      if ( this.currentpage < this.getPageCount() ) {
+        this.currentpage++;
+        this.fire('pager-next', { page: this.currentpage });
+      }
+    },
+
+    /**
+     * Updates the current page if the page is in bound
+     *
+     * @param {string} page
+     * @method changePage
+     */
+    changePage: function (page) {
+      var desiredPage = parseInt(page, 10);
+      if (desiredPage <= this.getPageCount()) {
+        this.currentpage = desiredPage;
+      }
+    },
+
+    prevPageDisabled: function () {
+      return this.currentpage === 0 ? "disabled" : "";
+    },
+
+    nextPageDisabled: function() {
+      return this.currentpage === this.getPageCount() ? "disabled" : "";
+    },
+
+    getPageCount: function () {
+      return Math.ceil( this.data.length / this.perpage ) - 1;
+    },
+
+    setPage: function (e,d,t) {
+      this.currentpage = parseInt( t.dataset.item, 10 );
+    },
+
+    /**
+     * Called when the current page changes
+     *
+     * @param {Object} page
+     * @event pager-change
+     */
+    currentpageChanged: function () {
+      this.items = this.filterPage();
+      this.currentRange = this.range();
+      this.fire('pager-change', { page: this.currentpage, data: this.items });
+    },
+
+    perpageChanged: function () {
+      this.currentpageChanged();
+    },
+
+    range: function () {
+      var paginations = [];
+      var start = this.currentpage;
+
+      if ( start > this.getPageCount() - this.rangeSize ) {
+        start = this.getPageCount() - this.rangeSize + 1;
+      }
+
+      for ( var i = 0; i < start + this.rangeSize; i++ ) {
+        paginations.push(i);
+      }
+
+      return paginations;
+    },
+
+    filterPage: function () {
+      return this.data.slice(this.currentpage * this.perpage, (this.currentpage * this.perpage) + this.perpage);
+    },
+
+    ready: function () {
+      if (this.customTemplate) {
+        /* The custom layout for your pagination controls will likely
+           use templates, which we will need to re-bind to data within
+           the scope of this element. The .scope hack below gives us
+           a reference to the element scope that we can bind to, populating
+           your supplied template accordingly. We will update this if we
+           find a better way to handle it.*/
+        this.scope = this;
+        var tmpl = document.createElement('template');
+        tmpl.id = "itemTemplate";
+        tmpl.innerHTML = this.innerHTML;
+        this.shadowRoot.appendChild(tmpl);
+      }
+    }
+  });
+  </script>
+</polymer-element>

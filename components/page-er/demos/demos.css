@@ -1,0 +1,150 @@
+/*
+  Styles for Polymer pagination element demos.
+*/
+
+body {
+  font-family: 'RobotoDraft', 'Helvetica', 'Arial', sans-serif;
+  margin-top: 90px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+table {
+  border: 1px solid #eeeeee;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+table th,
+table td {
+  text-align: center;
+  padding: 6px;
+}
+tbody > tr:nth-child(2n+1) > td,
+tbody > tr:nth-child(2n+1) > th {
+  background-color: #eeeeee;
+}
+
+tr td img {
+  width: 200px;
+}
+
+/*
+  Customize pagination styling
+*/
+
+page-er {
+  margin: 0 auto;
+}
+
+
+page-er::shadow .pagination li button {
+  color: white;
+  background: #3E50B4;
+  font-size: 1em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+}
+
+page-er::shadow .pagination li button:hover {
+  background: #303F9F;
+}
+
+page-er::shadow .pagination li.active button {
+  background: #E91E63;
+}
+
+page-er::shadow .pagination li.disabled button {
+  background: #B1B9E1;
+}
+
+/* For the paper.html demo */
+
+page-er::shadow .pagination li.active paper-button {
+  background: #E91E63;
+}
+
+page-er::shadow paper-button.colored {
+  color: #4285f4;
+  fill: #4285f4;
+}
+
+page-er::shadow paper-button[raisedButton].colored {
+  background: #4285f4;
+  color: #fff;
+}
+
+page-er::shadow paper-button[raisedButton].colored #ripple,
+page-er::shadow paper-button[raisedButton].colored::shadow #ripple {
+  color: #2a56c6;
+}
+
+page-er::shadow paper-button[raisedButton].colored #focusBg,
+page-er::shadow paper-button[raisedButton].colored::shadow #focusBg {
+  background: #3367d6;
+}
+
+/* Header styles */
+/* Taken from Web Starter Kit */
+
+.paper-shadow {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.paper-toolbar {
+  color: #fff;
+  background: #E51D64; /*#3F51B5;*/
+}
+
+.app-bar, .navdrawer-container, main {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.promote-layer {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.app-bar {
+  display: block;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.app-bar .logo {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: 1.3em;
+  margin: 0 16px;
+  padding: 0;
+  color: #fefefe;
+  float: none;
+  max-width: none;
+  font-weight: 400;
+  line-height: 64px;
+}
+
+.codesnippet {
+  background: black;
+  color: white;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.codesnippet .highlight-code {
+  color: #F5EA96;
+}
+
+.codesnippet .comment {
+  color: #62B1FE;
+}
