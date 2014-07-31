@@ -1,6 +1,6 @@
 {
   "name": "page-er",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Polymer element for paginating model data, rendering a set of pagination controls for navigating through that data.",
   "keywords": "pagination, paginate, web-components",
   "main": "page-er.html",
