@@ -96,7 +96,7 @@
 	});
 
   options.addEventListener('change', function(e){
-    m.perpage = this.options[this.selectedIndex].value;
+    m.perpage = parseInt(this.options[this.selectedIndex].value, 10);
     m.currentpage = 0;
   });
 </script>
