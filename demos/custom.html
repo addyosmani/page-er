@@ -81,6 +81,10 @@
     });
   }
 
+  // To avoid pager-change stamping out your route
+  // initially.
+  var initialPath = false;
+
   // When Polymer (and our paginator) are ready..
   document.addEventListener('polymer-ready', function() {
     // Activate the model data on our paginator
@@ -92,6 +96,7 @@
       m.data = model.items;
     }
     m.changePage(r.route);
+    initialPath = true;
   });
 
   document.addEventListener('pager-next', function(e) {
@@ -111,7 +116,11 @@
   // Anytime our paged set changes, update the template
   document.addEventListener('pager-change', function(e) {
     t.model = { items: e.detail.data };
-    r.route = e.detail.page;
+    if(!!initialPath) {
+      r.route = e.detail.page;
+    } else {
+      initialPath = false;
+    }
   });
 </script>
 </body>

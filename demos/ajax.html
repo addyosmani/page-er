@@ -61,6 +61,10 @@
 	// Create a model we will populate with data
 	var model = {};
 
+	// To avoid pager-change stamping out your route
+	// initially.
+	var initialPath = false;
+
 	// When Polymer (and our paginator) are ready..
 	document.addEventListener('polymer-ready', function() {
 		var ajax = document.querySelector("core-ajax");
@@ -83,6 +87,7 @@
 				m.data = model.items.feed.entry;
 			}
 			m.changePage(r.route);
+			initialPath = true;
 		}
 	});
 
@@ -96,6 +101,15 @@
 
 	document.addEventListener('pager-data', function(e) {
 		t.model.items.feed.entry = e.detail.data;
+	});
+
+	document.addEventListener('pager-change', function(e) {
+		t.model.items.entry = { items: e.detail.data };
+		if(!!initialPath) {
+			r.route = e.detail.page;
+		} else {
+			initialPath = false;
+		}
 	});
 
 	document.addEventListener('pager-change', function(e) {
