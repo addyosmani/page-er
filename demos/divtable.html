@@ -48,18 +48,18 @@
   <page-er perpage="5"></page-er>
 
       <div class="divTable">
-             <div class="headRow">
-                <div class="divCell">Id</div>
-                <div  class="divCell">Item name</div>
-                <div  class="divCell">Description</div>
-             </div>
-             <template id="items" repeat="{{items}}">
-                <div class="divRow">
-                      <div class="divCell">{{id}}</div>
-                    <div class="divCell">{{name}}</div>
-                    <div class="divCell">{{description}}</div>
-                </div>
-              </template>
+         <div class="headRow">
+            <div class="divCell">Id</div>
+            <div class="divCell">Item name</div>
+            <div class="divCell">Description</div>
+         </div>
+         <template id="items" repeat="{{items}}">
+            <div class="divRow">
+                <div class="divCell">{{id}}</div>
+                <div class="divCell">{{name}}</div>
+                <div class="divCell">{{description}}</div>
+            </div>
+          </template>
       </div>
 
     <select name="options" id="options">
@@ -117,7 +117,7 @@
 	});
 
   options.addEventListener('change', function(e){
-    m.perpage = this.options[this.selectedIndex].value;
+    m.perpage = parseInt(this.options[this.selectedIndex].value, 10);
     m.currentpage = 0;
   });
 </script>
