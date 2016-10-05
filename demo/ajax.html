@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>page-er Demo: iron-ajax</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../page-er.html">
+  <link rel="import" href="../../flatiron-director/flatiron-director.html">
+  <link rel="import" href="../../iron-ajax/iron-ajax.html">
+  <link rel="stylesheet" href="demo.css" shim-shadowdom>
+</head>
+<body unresolved>
+
+<header class="app-bar promote-layer paper-toolbar paper-shadow">
+  <div class="app-bar-container paper-toolbar">
+    <h1 class="logo">page-er with ajax data source</h1>
+  </div>
+</header>
+
+<p>A `page-er` looks like this:</p>
+
+<!-- Using Custom Elements -->
+<page-er perpage="10" rangeSize="3"></page-er>
+
+<flatiron-director auto-hash></flatiron-director>
+<iron-ajax auto url="https://api.github.com/search/repositories"
+  params='{"q":"polymer"}'
+  handleAs="json"></iron-ajax>
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Language</th>
+        <th>Stars</th>
+        <th>Crated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template id="items" is="dom-repeat">
+        <tr>
+          <td><a href$="[[item.html_url]]">[[item.name]]</td>
+          <td>[[item.language]]</td>
+          <td>[[item.stargazers_count]]</td>
+          <td>[[item.created_at]]</td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+</div>
+<script>
+  // Select the grid/table where your main data will appear
+  var t = document.querySelector("#items");
+  // Select the paginator to use with this element
+  var m = document.querySelector("page-er");
+  // Routing
+  var r = document.querySelector("flatiron-director");
+
+  // When Polymer (and our paginator) are ready.
+  document.addEventListener('WebComponentsReady', function() {
+    var ajax = document.querySelector("iron-ajax");
+
+    ajax.addEventListener(
+      "response",
+      function(e) {
+        m.data = e.detail.response.items;
+
+        // Jump to a certain page
+        if (r.route) {
+          m.changePage(r.route);
+        }
+      }
+    );
+  });
+
+  document.addEventListener('pager-data', function(e) {
+    // Update the current view
+    t.items = e.detail.data;
+  });
+
+  document.addEventListener('pager-change', function(e) {
+    t.items = e.detail.data;
+    r.route = e.detail.page;
+  });
+</script>
+</body>
+</html>

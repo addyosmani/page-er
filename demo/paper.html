@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>page-er Demo: custom templates</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../page-er.html">
+  <link rel="import" href="../../flatiron-director/flatiron-director.html">
+  <link rel="import" href="../../paper-button/paper-button.html">
+
+
+  <link rel="stylesheet" href="demo.css" shim-shadowdom>
+</head>
+<body unresolved>
+
+<header class="app-bar promote-layer paper-toolbar paper-shadow">
+  <div class="app-bar-container paper-toolbar">
+    <h1 class="logo">page-er with a custom pagination template</h1>
+  </div>
+</header>
+
+<p>A `page-er` looks like this:</p>
+
+<!-- Using Custom Elements -->
+<page-er perpage="5" currentpage="0" custom-template>
+  <template>
+    <div class="pagination" id="pagination">
+      <ul>
+        <li><paper-button on-click="firstPage">First</paper-button></li>
+        <li class$="[[computeTernary(currentpage, 0, 'disabled')]]">
+          <paper-button on-click="prevPage">Previous</paper-button>
+        </li>
+        <template is="dom-repeat" items="[[currentRange]]" as="n">
+          <li class$="[[computeTernary(currentpage, n, 'active')]]" on-click="setPage">
+            <paper-button data-item$="[[n]]" class="colored" label="[[computePageNum(n)]]" raised>[[computePageNum(n)]]</button>
+          </li>
+        </template>
+        <li class$="[[computeTernary(currentpage, pageCount, 'disabled')]]">
+          <paper-button on-click="nextPage">Next</paper-button>
+        </li>
+        <li><paper-button on-click="lastPage">Last</paper-button></li>
+      </ul>
+    </div>
+  </template>
+</page-er>
+
+<flatiron-director id="router" auto-hash></flatiron-director>
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Item name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template id="items" is="dom-repeat">
+        <tr>
+          <td>[[item.id]]</td>
+          <td>[[item.name]]</td>
+          <td>[[item.description]]</td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+</div>
+<script>
+  // Select the grid/table where your main data will appear
+  var t = document.querySelector("#items");
+  // Select the paginator to use with this element
+  var m = document.querySelector("page-er");
+  // Routing
+  var r = document.querySelector("flatiron-director");
+
+  // Create a list of items we will populate with data
+  var items = [];
+
+  // As this is an example, populate some sample data inside
+  for (var i = 1; i < 50; i++) {
+    items.push({
+      id: i,
+      name: "Item "+ i,
+      description: "description " + i
+    });
+  }
+
+  // When Polymer (and our paginator) are ready..
+  document.addEventListener('WebComponentsReady', function() {
+    // Set items to be paginated
+    m.data = items;
+
+    // Jump to a certain page
+    if (r.route) {
+      m.changePage(r.route);
+    }
+  });
+
+  document.addEventListener('pager-data', function(e) {
+    // Update the current view
+    t.items = e.detail.data;
+  });
+
+  // Anytime our paged set changes, update the template
+  document.addEventListener('pager-change', function(e) {
+    t.items = e.detail.data;
+    r.route = e.detail.page;
+  });
+</script>
+</body>
+</html>

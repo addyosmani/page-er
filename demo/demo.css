@@ -41,7 +41,7 @@ page-er {
 }
 
 
-page-er::shadow .pagination li button {
+page-er .pagination li button {
   color: white;
   background: #3E50B4;
   font-size: 1em;
@@ -49,41 +49,43 @@ page-er::shadow .pagination li button {
   padding: 8px 12px;
 }
 
-page-er::shadow .pagination li button:hover {
+page-er .pagination li button:hover {
   background: #303F9F;
 }
 
-page-er::shadow .pagination li.active button {
+page-er .pagination li.active button {
   background: #E91E63;
 }
 
-page-er::shadow .pagination li.disabled button {
+page-er .pagination li.disabled button {
   background: #B1B9E1;
 }
 
 /* For the paper.html demo */
 
-page-er::shadow .pagination li.active paper-button {
+page-er .pagination li.active paper-button {
   background: #E91E63;
 }
 
-page-er::shadow paper-button.colored {
+page-er paper-button.colored {
   color: #4285f4;
   fill: #4285f4;
+  min-width: auto;
+  margin: 0;
 }
 
-page-er::shadow paper-button[raisedButton].colored {
+page-er paper-button[raised].colored {
   background: #4285f4;
   color: #fff;
 }
 
-page-er::shadow paper-button[raisedButton].colored #ripple,
-page-er::shadow paper-button[raisedButton].colored::shadow #ripple {
+page-er paper-button[raised].colored #ripple,
+page-er paper-button[raised].colored::shadow #ripple {
   color: #2a56c6;
 }
 
-page-er::shadow paper-button[raisedButton].colored #focusBg,
-page-er::shadow paper-button[raisedButton].colored::shadow #focusBg {
+page-er paper-button[raised].colored #focusBg,
+page-er paper-button[raised].colored::shadow #focusBg {
   background: #3367d6;
 }
 

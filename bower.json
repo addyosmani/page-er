@@ -4,16 +4,15 @@
   "description": "A Polymer element for paginating model data, rendering a set of pagination controls for navigating through that data.",
   "keywords": ["pagination", "paginate", "web-components"],
   "main": "page-er.html",
+  "homepage": "https://github.com/addyosmani/page-er",
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.3.4",
-    "flatiron-director": "PolymerLabs/flatiron-director#~0.3.0",
-    "core-ajax": "Polymer/core-ajax#~0.3.4",
-    "paper-button": "Polymer/paper-button#~0.3.4"
+    "polymer": "Polymer/polymer#^1.7.0"
   },
-  "resolutions": {
-    "core-icon": "master",
-    "core-iconset": "master",
-    "core-icons": "master",
-    "core-iconset-svg": "master"
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+    "web-component-tester": "^4.3.5",
+    "flatiron-director": "PolymerLabs/flatiron-director#^1.0.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
+    "paper-button": "PolymerElements/paper-button#^1.0.13"
   }
 }
