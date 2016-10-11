@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>page-er Demo: routing</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../page-er.html">
+  <link rel="import" href="../../flatiron-director/flatiron-director.html">
+  <link rel="stylesheet" href="demo.css" shim-shadowdom>
+</head>
+<body unresolved>
+
+<header class="app-bar promote-layer paper-toolbar paper-shadow">
+  <div class="app-bar-container paper-toolbar">
+    <h1 class="logo">page-er with routing</h1>
+  </div>
+</header>
+
+<p>A `page-er` looks like this:</p>
+
+<page-er perpage="5" currentpage="0"></page-er>
+
+<flatiron-director auto-hash></flatiron-director>
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Item name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template id="items" is="dom-repeat">
+        <tr>
+          <td>[[item.id]]</td>
+          <td>[[item.name]]</td>
+          <td>[[item.description]]</td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+
+</div>
+<script>
+  // Select the grid/table where your main data will appear
+  var t = document.querySelector("#items");
+  // Select the paginator to use with this element
+  var m = document.querySelector("page-er");
+  // Routing
+  var r = document.querySelector("flatiron-director");
+
+  // Create a list of items we will populate with data
+  var items = [];
+
+  // As this is an example, populate some sample data inside
+  for (var i = 1; i < 50; i++) {
+    items.push({
+      id: i,
+      name: "Item "+ i,
+      description: "description " + i
+    });
+  }
+
+  // When Polymer (and our paginator) are ready..
+  document.addEventListener('WebComponentsReady', function() {
+    // Set items to be paginated
+    m.data = items;
+
+    // Jump to a certain page
+    if (r.route) {
+      m.changePage(r.route);
+    }
+  });
+
+  document.addEventListener('pager-data', function(e) {
+    // Update the current view
+    t.items = e.detail.data;
+  });
+
+  // Anytime our paged set changes, update the template
+  document.addEventListener('pager-change', function(e) {
+    t.items = e.detail.data;
+    r.route = e.detail.page;
+  });
+</script>
+</body>
+</html>
